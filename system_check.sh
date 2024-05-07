@@ -20,7 +20,9 @@ RAM_WARNING=80
 DISK_WARNING=90
 
 # Warning logic
-
+if [[ $cpu_usage -ge $CPU_WARNING ]]; then
+  echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $CPU_WARNING%)"
+fi
 
 # Display info
 echo "Hostname: $hostname"
