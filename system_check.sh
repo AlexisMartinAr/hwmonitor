@@ -14,8 +14,14 @@ CPU_TEMP_O=$(cat $CPU_TEMP_FILE)
 CPU_TEMP_C=$((CPU_TEMP_O/1000))
 CPU_TEMP_F=$(($CPU_TEMP_C * 9/5 + 32))
 
-# CPU
+# Get thresholds from .conf
+thresholds_file="system_thresholds.conf"
+if [[ ! -f "$thresholds_file"]]; then
+  echo "No thresholds file found ('$thresholds_file')"
+  exit 1
+fi
+
+# Warnings
 if [[ $cpu_usage -ge $CPU_WARNING ]]; then
-  
-#   echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $CPU_WARNING%)"
+   echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $CPU_WARNING%)"
 fi
