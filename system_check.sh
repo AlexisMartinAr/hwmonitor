@@ -14,22 +14,8 @@ CPU_TEMP_O=$(cat $CPU_TEMP_FILE)
 CPU_TEMP_C=$((CPU_TEMP_O/1000))
 CPU_TEMP_F=$(($CPU_TEMP_C * 9/5 + 32))
 
-# Thresholds (defined as % of use)
-CPU_WARNING=80
-RAM_WARNING=80
-DISK_WARNING=90
-
-# Warning logic
+# CPU
 if [[ $cpu_usage -ge $CPU_WARNING ]]; then
-  echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $CPU_WARNING%)"
+  
+#   echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $CPU_WARNING%)"
 fi
-
-# Display info
-echo "Hostname: $hostname"
-echo "Uptime: $uptime"
-echo "Load Average: $loadavg"
-echo "CPU Usage: $cpu_usage%"
-echo "RAM Usage: $ram_usage%"
-echo "Disk Usage: $df_output"
-
-echo "CPU Temperature: $CPU_TEMP_C C / $CPU_TEMP_F F"
