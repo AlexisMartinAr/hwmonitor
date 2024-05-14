@@ -22,12 +22,16 @@ get_threshold() {
   echo "$value"
 }
 cpu_warning=$(get_threshold "cpu_warning")
+cpu_tempc_warning=$(get_threshold "cpu_tempc_warning")
 ram_warning=$(get_threshold "ram_warning")
 disk_warning=$(get_threshold "disk_warning")
 
 # Warnings
 if [[ $cpu_usage -ge $cpu_warning ]]; then
   echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $cpu_warning%)"
+fi
+if [[ $cpu_temp_c -ge $cpu_tempc_warning ]]; then
+  echo "WARNING: CPU temperature is at $cpu_temp_c C (above threshold of $cpu_tempc_warning C)"
 fi
 if [[ $ram_usage -ge $ram_warning ]]; then
   echo "WARNING: RAM usage is at $ram_usage% (above threshold of $ram_warning%)"
