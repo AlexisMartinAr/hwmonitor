@@ -18,7 +18,7 @@ if [[ ! -f "$thresholds_file"]]; then
 fi
 get_threshold() {
   key="$1"
-  value=$(grep "^$key=" "$thresholds_file")
+  value=$(grep "^$key=" "$thresholds_file" | awk -F= '{print $2}')
   echo "$value"
 }
 
