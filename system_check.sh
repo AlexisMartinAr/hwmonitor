@@ -32,9 +32,13 @@ fi
 if [[ $ram_usage -ge $ram_warning ]]; then
   echo "WARNING: RAM usage is at $ram_usage% (above threshold of $ram_warning%)"
 fi
-if [[ $ ]]
-  echo 
-fi
+for line in $df_output; do
+  percent_used=$(echo $line | awk '{print $5}')
+  if [[ $percent_used -ge $disk_warning ]]; then
+    mount_point=$(echo $line | awk '{print $6}')
+    echo "WARNING: Disk usage on $mount_point is at $percent_used% (above threshold of $disk_warning%)"
+  fi
+done
 
 # General output
 echo "Hostname: $hostname"
