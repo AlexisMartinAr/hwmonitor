@@ -16,6 +16,11 @@ if [[ ! -f "$thresholds_file"]]; then
   echo "No thresholds file found ('$thresholds_file')"
   exit 1
 fi
+get_threshold() {
+  key="$1"
+  value=$(grep "^$key=" "$thresholds_file")
+  echo "$value"
+}
 
 # Warnings
 if [[ $cpu_usage -ge $CPU_WARNING ]]; then
