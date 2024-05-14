@@ -35,3 +35,10 @@ fi
 if [[ $ ]]
   echo 
 fi
+
+# General output
+echo "Hostname: $hostname"
+echo "Uptime: $uptime"
+echo "CPU Usage: $cpu_usage%"
+echo "RAM Usage: $ram_usage%"
+echo "Disk Usage: $df_output"
