@@ -28,25 +28,26 @@ disk_warning=$(get_threshold "disk_warning")
 
 # Warnings
 if [[ $cpu_usage -ge $cpu_warning ]]; then
-  echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $cpu_warning%)"
+  echo "WARNING: CPU usage is at $cpu_usage% (above threshold of $cpu_warning%)" >> system_warnings.txt
 fi
 if [[ $cpu_temp_c -ge $cpu_tempc_warning ]]; then
-  echo "WARNING: CPU temperature is at $cpu_temp_c C (above threshold of $cpu_tempc_warning C)"
+  echo "WARNING: CPU temperature is at $cpu_temp_c C (above threshold of $cpu_tempc_warning C)" >> system_warnings.txt
 fi
 if [[ $ram_usage -ge $ram_warning ]]; then
-  echo "WARNING: RAM usage is at $ram_usage% (above threshold of $ram_warning%)"
+  echo "WARNING: RAM usage is at $ram_usage% (above threshold of $ram_warning%)" >> system_warnings.txt
 fi
 for line in $df_output; do
   percent_used=$(echo $line | awk '{print $5}')
   if [[ $percent_used -ge $disk_warning ]]; then
     mount_point=$(echo $line | awk '{print $6}')
-    echo "WARNING: Disk usage on $mount_point is at $percent_used% (above threshold of $disk_warning%)"
+    echo "WARNING: Disk usage on $mount_point is at $percent_used% (above threshold of $disk_warning%)" >> system_warnings.txt
   fi
 done
 
 # General output
-echo "Hostname: $hostname"
-echo "Uptime: $uptime"
-echo "CPU Usage: $cpu_usage%"
-echo "RAM Usage: $ram_usage%"
-echo "Disk Usage: $df_output"
+echo "Hostname: $hostname" >> system_health.txt
+echo "Uptime: $uptime" >> system_health.txt
+echo "CPU Usage: $cpu_usage%" >> system_health.txt
+echo "CPU Temperature: $cpu_temp_c C" >> system_health.txt
+echo "RAM Usage: $ram_usage%" >> system_health.txt
+echo "Disk Usage: $df_output" >> system_health.txt
